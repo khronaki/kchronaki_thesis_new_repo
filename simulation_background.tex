@@ -1,0 +1,25 @@
+
+To evaluate our contributions on larger systems we make use of the TaskSim simulator~\cite{AbstrLevels_TACO12,MUSA}. 
+TaskSim is a trace driven simulator, that supports the specification of homogeneous or heterogeneous systems with many cores. 
+The tracing overhead of the simulator is less than 10\% and the simulation is accurate as long as there is no contention in the shared memory resources on a real system~\cite{MUSA}.
+By default, TaskSim allows the specification of the amount of cores and supports up to two core types in the case of heterogeneous asymmetric systems. 
+This is done by specifying the number of cores of each type and their difference in performance between the different types (performance ratio) in the TaskSim configuration file.
+
+Our evaluation consists of experiments on both symmetric and asymmetric platforms with the number of cores varying from 8 to 512.
+In the case of asymmetric systems, we simulate the behaviour of an Arm big.LITTLE architecture~\cite{ARM}.
+
+
+%To set the correct performance ratio between big and little cores, we measure the sequential execution time of each application on a real ARM big.LITTLE platform when running on a little and on a big core. 
+%We use the Hardkernel Odroid~XU3 board that includes a Samsung Exynos 5422 chip with ARM big.LITTLE.
+%The big cores run at 1.6GHz and the little cores at 800MHz.
+%We compare its performance when they run on a little and on a big core.
+
+%% This is TaskGenX specific!!
+%Table~\ref{tab.apps} shows the measured performance ratio for each case.
+%The average performance ratio among our 13 workloads is 3.8.
+%Thus in the specification of the asymmetric systems we use as performance ratio the value 4.
+
+To simulate our approaches using TaskSim we first run each application/input in the TaskSim trace generation mode.
+This mode enables the online tracking of task duration and synchronization overheads and stores them in a trace file. 
+To perform the simulation, TaskSim uses the information stored in the trace file and executes the application by providing this information to the runtime system.
+For our experiments we generate three trace files for each application/input combination on a Genuine Intel 16-core machine running at 2.60GHz.

@@ -1,0 +1,98 @@
+\begin{abstract} 
+      
+    %big-little
+    Asymmetric multi-cores (AMCs) are a successful architectural solution for both mobile devices and supercomputers.
+    These architectures combine different types of processing cores designed at different performance and power optimization points, thus exposing a performance-power trade-off.
+    By maintaining two types of cores (fast and slow) AMCs have the potential to provide high performance under the facility power budget.
+    However, there are significant challenges when using AMCs such as scheduling and load balancing.
+    
+    In this thesis we initially explore the potential of these machines when executing current high-performance applications and we search for the most appropriate execution model.
+    Specifically we evaluate several execution models on an Arm big.LITTLE AMC using the PARSEC benchmark suite that includes representative highly parallel applications.
+	We compare schedulers at the user, OS and runtime system levels, using both static and dynamic options and multiple configurations, and assess the impact of these options on the well-known problem of balancing the load across AMCs.
+	Our results demonstrate that scheduling is more effective when it takes place in the runtime system level as it improves the user-level scheduling by 23\%; at the same time the heterogeneous-aware OS scheduling solution improves the user-level scheduling by 10\%.
+
+    Following this outcome, this thesis focuses on increasing performance of AMC systems by improving scheduling in the runtime system level.
+    Scheduling in the runtime system level is provided by the use of task-based parallel programming models.
+    These programming models offer programmability and flexibility to the programmer as they consist of an interface and a runtime system to manage the underlying resources and threads.
+    %Current and future task-based programming models need to be portable and efficient when moving to such systems.
+    %However, there are significant challenges when using these programming models.
+    %When it comes to AMC systems these challenges include scheduling and load balancing.
+    %Another important challenge that appears on both symmetric and asymmetric systems is the high task generation overheads introduced by these programming models.
+    %In this thesis we provide software solutions and hardware proposals to overcome these challenges. 
+   % We present our solutions within OmpSs, a task-based parallel programming model with dependency tracking and dynamic scheduling and forerunner of OpenMP4.0~\cite{OpenMP4.0:Manual2015}.    
+%    To overcome the load balancing and scheduling challenges of AMC systems, we propose three novel task scheduling approaches that target asymmetric systems.
+	In this thesis we improve scheduling with task-based programming models by providing three novel task scheduling approaches for AMCs.
+    These dynamic scheduling policies reduce total execution time either by detecting the longest or the critical path of the dynamic task dependency graph (TDG) of the application.
+    %, or by finding the earliest executor of a task.
+    %They do so by prioritizing the newly-created tasks at runtime, detecting the longest or critical path of the dynamic task dependency graph, and assigning critical tasks to fast cores.
+    They use dynamic scheduling and information discoverable during execution, fact that makes them implementable and functional without the need of off-line profiling.
+    In our evaluation we compare these scheduling approaches with an existing state-of the art heterogeneous scheduler and we track their improvement over a FIFO baseline scheduler.
+    We show that the heterogeneous schedulers improve the baseline by up to 1.45$\times$ on a real 8-core asymmetric system and up to 2.1$\times$ on a simulated 32-core asymmetric chip.
+    
+    
+    Another enhancement we provide in task-based programming models is the adaptability to fine grained parallelism.
+    The increasing number of cores on modern CMPs is pushing research towards the use of fine grained workloads, which is an important challenge for task-based programming models.
+    % need to be able to handle such workloads and offer performance and scalability.
+%    Using specialized hardware for boosting performance of task-based programming models is a common practice in the research community.    
+	%Such workloads however result to high task creation overheads
+    Our study makes the observation that task creation becomes a bottleneck when executing fine grained workloads with task-based programming models.
+    As the number of cores increases, the time spent generating the tasks of the application is becoming more critical to the entire execution.
+    To overcome this issue, we propose TaskGenX.
+    TaskGenX offers a solution for minimizing task creation overheads and relies both on the runtime system and a dedicated hardware.
+    %We propose \proposal, a task-based programming model that offers a minimalistic approach to runtime overheads acceleration.
+    On the runtime system side, TaskGenX decouples the task creation from the other runtime activities.
+    It then transfers this part of the runtime to a specialized hardware.
+    We draw the requirements for this hardware in order to boost execution of highly parallel applications.
+    From our evaluation using 11 parallel workloads on both symmetric and asymmetric systems, we obtain performance improvements up to 15$\times$, averaging to 3.1$\times$ over the baseline.
+    
+    
+    Finally, this thesis presents a showcase for a real-time CPU scheduler with the goal to increase the frames per second (FPS) during the game-play on mobile devices using AMC systems.% ARM big.LITTLE architecture. 
+    We design and implement the RTS scheduler in the Android framework.
+    RTS provides an efficient scheduling policy that takes into account the current temperature of the system to perform task migration. 
+    RTS solution increases the median FPS of the baseline mechanisms by up to 7.5\% and at the same time it maintains temperature stable. 
+%    Initially 
+%    
+%    This paper performs the first extensive evaluation of how portable are the current HPC applications for such supercomputing systems.
+%    Specifically we evaluate several execution models on an ARM big.LITTLE AMC using the PARSEC benchnark suite that includes representative highly parallel applications.
+%    We compare schedulers at the user, OS and runtime levels, using both static and dynamic options and multiple configurations, and assess the impact of these options on the well-known problem of balancing the load across AMCs.
+%    Our results demonstrate that scheduling is more effective when it takes place in the runtime system level as it improves the baseline by 23\%, while the heterogeneous-aware OS scheduling solution improves the baseline by 10\%.
+    
+%    %CATS
+%    In the search of performance and energy efficiency, heterogeneous multi-core architectures are an appealing option for next-generation high-performance computing. 
+%    %These architectures combine different types of processing cores designed at different performance and power optimization points, thus exposing a performance-power trade-off.
+%        
+%    Current and future parallel programming models need to be portable and efficient when moving to such systems. OmpSs is a task-based programming model with dependency tracking and dynamic scheduling. This paper describes the OmpSs approach on scheduling dependent tasks onto the asymmetric cores of a heterogeneous system. The proposed scheduling policy reduces total execution time by prioritizing the newly-created tasks at runtime, detecting the longest path of the dynamic task dependency graph, and assigning critical tasks to fast cores.
+%    
+%    Previous criticality-aware schedulers for heterogeneous systems are static and based on the knowledge of profiling information. Our proposal performs dynamic scheduling using information discoverable at runtime, is implementable and works without the need of an oracle or profiling. 
+%    
+%    In our evaluation using four dependency-intensive applications, our proposal outperforms a dynamic implementation of Heterogeneous Earliest Finish Time by up to 1.15$\times$, and the default breadth-first OmpSs scheduler by up to 1.3$\times$ in a real 8-core heterogeneous platform and up to 2.7$\times$ in a simulated 128-core chip.
+%    
+%    %TPDS
+%    As performance and energy efficiency have become the main challenges for next-generation high-performance computing, asymmetric multi-core architectures can provide solutions to tackle these issues.
+%    Parallel programming models need to be able to suit the needs of such systems and keep on increasing the application's portability and efficiency.
+%    This paper proposes two task scheduling approaches that target asymmetric systems.
+%    These dynamic scheduling policies reduce total execution time either by detecting the longest or the critical path of the dynamic task dependency graph of the application, or by finding the earliest executor of a task.
+%    They use dynamic scheduling and information discoverable during execution, fact that makes them implementable and functional without the need of off-line profiling.
+%    In our evaluation we compare these scheduling approaches with two existing state-of the art heterogeneous schedulers and we track their improvement over a FIFO baseline scheduler.
+%    We show that the heterogeneous schedulers improve the baseline by up to 1.45$\times$ in a real 8-core asymmetric system and up to 2.1$\times$ in a simulated 32-core asymmetric chip.
+%    
+%    %TaskGenX
+%    As chip multi-processors (CMPs) are becoming more and more complex, software solutions such as parallel programming models are attracting a lot of attention.
+%    Task-based parallel programming models offer an appealing approach to utilize complex CMPs.
+%    However, the increasing number of cores on modern CMPs is pushing research towards the use of fine grained parallelism.
+%    Task-based programming models need to be able to handle such workloads and offer performance and scalability.
+%    Using specialized hardware for boosting performance of task-based programming models is a common practice in the research community.
+%    
+%    Our paper makes the observation that task creation becomes a bottleneck when we execute fine grained parallel applications with many task-based programming models.
+%    As the number of cores increases the time spent generating the tasks of the application is becoming more critical to the entire execution.
+%    To overcome this issue, we propose TaskGenX.
+%    TaskGenX offers a solution for minimizing task creation overheads and relies both on the runtime system and a dedicated hardware.
+%    %We propose \proposal, a task-based programming model that offers a minimalistic approach to runtime overheads acceleration.
+%    On the runtime system side, TaskGenX decouples the task creation from the other runtime activities.
+%    It then transfers this part of the runtime to a specialized hardware.
+%    We draw the requirements for this hardware in order to boost execution of highly parallel applications.
+%    From our evaluation using 11 parallel workloads on both symmetric and asymmetric systems, we obtain performance improvements up to 15$\times$, averaging to 3.1$\times$ over the baseline.
+%    
+%    %Internship
+%    This internship presents a showcase for a real-time CPU scheduler with the goal to increase the frames per second (FPS) during the gameplay on mobile devices with the ARM big.LITTLE architecture. We design and implement the scheduler in the Android framework and provide an efficient scheduling policy that takes into account the current temperature and performs task migration. Our solution increases the median FPS of the currently used mechanisms by up to 7.5\% and at the same time it maintains temperature stable. 
+\end{abstract}

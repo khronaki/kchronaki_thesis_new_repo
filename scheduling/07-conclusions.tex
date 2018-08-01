@@ -1,0 +1,29 @@
+
+\section{Conclusions}
+\label{sec.scheduling.conclusions}
+We introduced the first critical-path-aware dynamic scheduler for heterogeneous systems as well as the first hybrid criticality-aware scheduler. Like CATS and contrary to previous works on criticality-aware scheduling that use synthetic TDGs and require prior knowledge of profiling information, our proposals work on real platforms with real applications and do not require off-line profiling.
+%, they are implementable and work without the need of profiling.
+
+We implemented and evaluated our scheduling proposals in the runtime system of the OmpSs programming model.
+We showed that even if the accuracy of CPATH is higher in terms of task criticality identification, it does not always increase performance. 
+Factors like the number of tasks and task cost variability play an important role on choosing the most appropriate scheduling policy and improve the performance of task-based applications.
+The implementations shown in this Chapter will be included in the next stable release of the OmpSs programming model. 
+Furthermore, the described policies are expected to be applicable to other task-based programming models with support for task dependencies. 
+%The presented schedulers assume two core types.
+%by manually choosing the cores that would act as fast, which limits the scheduling effect.
+%To improve this, the schedulers can be modified to assign different levels of criticality to the tasks and let the cores, according to their type, execute the tasks with the corresponding criticality level.
+
+%After determining the critical path, the scheduler could also consider the second, third etc. longest paths and insert their tasks in the corresponding ready queues. 
+%The user has to specify which cores are considered as fast for the effective execution of the critical tasks. 
+%We implemented and evaluated our criticality-aware task scheduler in the runtime system of the OmpSs programming model getting satisfactory results. The implementation shown in this paper will be included in the next stable release of OmpSs. Furthermore, there are no restrictions on applying our policy to other task-based programming models with support for task dependencies. 
+    
+%From our experiments on a real heterogeneous multi-core platform, we found a consistent performance improvement over the default breadth-first scheduling policy and a dynamic implementation of Heterogeneous Earliest Finish Time. The improvement of our proposal, which in most cases ranges from 10 to 20\% and reaches up to 30\%, is larger as we increase the number of cores. This gives a positive projection for CATS, as it is expected that the number of cores in multi-cores will increase throughout future generation designs.
+
+%From our simulation experiments, we found out that the improvement of CATS increases over the baseline with larger differences of performance among fast and slow cores. We explored performance ratios between two and four times faster fast cores over slow cores, with improvements ranging from 30\% to 170\%. 
+
+In conclusion, this chapter showed the potential of different heterogeneous schedulers to speed up dependency-intensive applications and take advantage of the asymmetric compute resources.
+
+
+%For future work, we aim to extend the scheduling policy to be adaptive so it can dynamically adjust its flexibility and work stealing policy depending on the application characteristics and availability of resources at runtime.
+
+%, and dynamically adapt its configuration to the one that best fits this combination.

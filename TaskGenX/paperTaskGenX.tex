@@ -1,0 +1,74 @@
+
+\chapter{Runtime Overheads Migration}
+\label{chapter.taskgenx}
+As chip multi-processors (CMPs) are becoming more and more complex, software solutions such as parallel programming models are attracting a lot of attention.
+Task-based parallel programming models offer an appealing approach to utilize complex CMPs.
+However, the increasing number of cores on modern CMPs is pushing research towards the use of fine grained parallelism.
+Task-based programming models need to be able to handle such workloads and offer performance and scalability.
+Using specialized hardware for boosting performance of task-based programming models is a common practice in the research community.
+
+This chapter makes the observation that task creation becomes a bottleneck when we execute fine grained parallel applications with task-based programming models.
+%From our experiments the time spent on per-task generation ranges from 13 to 39 microseconds.
+%From our experiments the average time spent on per-task generation is 19,2 microseconds while the average task time is 51936727.
+To quantify this statement, the creation of one task lasts from 0,08\% and can reach up to 38,47\% of one task's execution time\footnote{This percentage depends on the task's characteristics such as its data dependencies}.
+Applications whose task creation lasts more than 0,5\% of their per-task duration, task creation becomes a bottleneck as there is no continuous provision of tasks to the available resources.
+%
+%
+%each task creation
+%From our experiments task duration lasts from 2.5x of task creation up to 29472x of task creation. 
+%Applications where their task duration is less than 165x task duration suffer from task creation overheads. 
+As the number of cores increases the time spent generating the tasks of the application is becoming more critical to the entire execution.
+To overcome this issue, we propose {\proposal}.
+{\proposal} offers a solution for minimizing task creation overheads and relies both on the runtime system and a dedicated hardware.
+%We propose \proposal, a task-based programming model that offers a minimalistic approach to runtime overheads acceleration.
+On the runtime system side, {\proposal} decouples the task creation from the other runtime activities.
+It then transfers this part of the runtime to a specialized hardware.
+We draw the requirements for this hardware in order to boost execution of highly parallel applications.
+From our evaluation using 11 parallel workloads on both symmetric and asymmetric systems, we obtain performance improvements up to 15$\times$, averaging to 3.1$\times$ over the baseline.
+\newpage
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\label{sec:intro}
+\input{TaskGenX/01-introduction}
+
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+\section{Background and Motivation}
+\label{sec.taskgenx.background}
+\input{TaskGenX/02-background}
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+\section{Task Generation Express (TaskGenX)}
+\label{sec.taskgenx.ram}
+\input{TaskGenX/03-our_work}
+
+%\section{Hardware requirements}}
+%\label{sec:hw}
+\input{TaskGenX/hw}
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+
+\input{TaskGenX/04-experimental}
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+\section{Evaluation}
+\label{sec.taskgenx.evaluation}
+\input{TaskGenX/05-evaluation}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%\section{Related Work}
+%\label{sec:related}
+%\input{TaskGenX/06-related}
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+\label{sec.taskgenx.conclusions}
+\input{TaskGenX/07-conclusions}
+

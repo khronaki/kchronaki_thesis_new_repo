@@ -1,0 +1,46 @@
+\chapter{Task-Based Scheduling Solutions}
+\label{chapter.scheduling}
+In the previous chapter we showed that the most efficient way to utilize an AMC with HPC applications is by performing scheduling in the runtime system level, i.e. using a parallel programmind model.
+In this capter our goal is to enhance the current parallel programming models and make them more efficient when it comes to AMCs.
+
+As performance and energy efficiency have become the main challenges for next-generation high-performance computing, asymmetric multi-core architectures can provide solutions to tackle these issues.
+Parallel programming models need to be able to suit the needs of such systems and keep on increasing the application's portability and efficiency.
+This chapter presents three task scheduling approaches that target asymmetric systems.
+These dynamic scheduling policies reduce total execution time either by detecting the longest or the critical path of the dynamic task dependency graph of the application, or by finding the earliest executor of a task.
+They use dynamic scheduling and information discoverable during execution, fact that makes them implementable and functional without the need of off-line profiling.
+In our evaluation we compare these scheduling approaches against an existing state-of the art heterogeneous scheduler and we track their improvement over a FIFO baseline scheduler.
+We show that the heterogeneous schedulers improve the baseline by up to 1.45$\times$ in a real 8-core asymmetric system and up to 2.1$\times$ in a simulated 32-core asymmetric chip.
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+\input{scheduling/01-introduction}
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+%\section{Heterogeneous Scheduling}
+%\label{sec:scheduling}
+\input{scheduling/03-scheduling}
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+%\section{Experimental Methodology}
+%\label{sec:experimental}
+%\input{04-experimental}
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+\input{scheduling/05-evaluation}
+
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%
+%\section{Related Work}
+%\label{sec:related}
+%\input{scheduling/06-related}
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+
+\input{scheduling/07-conclusions}
+

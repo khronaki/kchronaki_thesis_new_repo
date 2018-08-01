@@ -1,0 +1,14 @@
+As performance and energy efficiency have become the main challenges for next-generation high-performance computing, asymmetric multi-core architectures can provide solutions to tackle these issues.
+Parallel programming models need to be able to suit the needs of such systems and keep on increasing the application's portability and efficiency.
+This paper proposes two task scheduling approaches that target asymmetric systems.
+These dynamic scheduling policies reduce total execution time either by detecting the longest or the critical path of the dynamic task dependency graph of the application, or by finding the earliest executor of a task.
+They use dynamic scheduling and information discoverable during execution, fact that makes them implementable and functional without the need of off-line profiling.
+In our evaluation we compare these scheduling approaches with two existing state-of the art heterogeneous schedulers and we track their improvement over a FIFO baseline scheduler.
+We show that the heterogeneous schedulers improve the baseline by up to 1.45$\times$ in a real 8-core asymmetric system and up to 2.1$\times$ in a simulated 32-core asymmetric chip.
+
+\if
+In the search of performance and energy efficiency, heterogeneous multi-core architectures are an appealing option for next-generation high-performance computing. 
+Current and future parallel programming models need to be portable and efficient when moving to such systems. OmpSs is a task-based programming model with dependency tracking and dynamic scheduling. This paper describes four different approaches on scheduling dependent tasks onto the asymmetric cores of a heterogeneous system. The described scheduling policies reduce total execution time either by detecting the longest or the critical path of the dynamic task dependency graph, or by finding the earliest executor of a task.
+Previous works on schedulers for heterogeneous systems are static and based on the knowledge of profiling information. In our study we gather four possible dynamic scheduling approaches that use information discoverable at runtime, are implementable and work without the need of an oracle or profiling.
+In our evaluation using five dependency-intensive applications, the heterogeneous scheduling approaches outperform the default breadth-first OmpSs scheduler by up to 1.45$\times$ in a real 8-core heterogeneous platform and up to 2.1$\times$ in a simulated 32-core chip.
+\fi

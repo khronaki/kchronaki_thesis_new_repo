@@ -1,0 +1,37 @@
+\section{Dynamic Heterogeneous Earliest Finish Time Scheduler (dHEFT)}
+\label{sec.scheduling.heft}
+The Heterogeneous Earliest Finish Time (HEFT) algorithm~\cite{HEFT} is a well-known state-of-the-art static scheduling algorithm for asymmetric systems.
+HEFT consists of two compile-time phases that use profiling information: the \textit{task prioritizing phase} and the \textit{processor selection phase}.
+In the first phase, the algorithm assigns priorities to the tasks based on their \textit{upward rank}, that is, the length of the critical path from a given task to the exit task including task computation and communication costs~\cite{HEFT}.
+When task prioritizing is done, the tasks are sorted according to their priorities.
+In the \textit{processor selection phase} the algorithm searches for each task the appropriate processor to execute it.
+By keeping communication and computation costs, HEFT assigns each task to the processor that will finish its execution at the earliest possible time.
+Topcuoglu et al. \cite{HEFT} present their results based on evaluation on synthetic TDGs and assume known task execution and communication times at compile time.
+The scheduling is static, so all the decisions are taken before execution.
+
+In this Chapter, since the evaluation consists of running real applications with unknown task costs, the best way to compare HEFT to our proposal is by using a dynamic version of HEFT algorithm (dHEFT).
+The dHEFT is implemented in the OmpSs programming model and is based on the implementation used in the evaluation of CATS~\cite{Chronaki:ICS2015}.
+This version assumes two different types of cores (fast and slow) and keeps records of the task costs in each core.
+DHEFT discovers the task costs at runtime, computes the mean cost of each tt-is for each core type and then finds the core that will finish the task at the earliest possible time.
+
+To find the earliest possible executor, dHEFT maintains
+one list per core (wlist) including the ready tasks waiting
+to be executed by that core. 
+When a task becomes ready, dHEFT first inserts it in the ordered ready queue; then the task with the highest upward rank is selected and dHEFT checks if there are execution time records for this task. 
+If the number of records is sufficient (we require a minimum of three records)
+then the estimated cost of the task is considered stable. 
+Using that estimated execution time, the task
+is scheduled to the earliest executor by consulting the wlist
+of all cores. If the number of records is not sufficient
+for one of the core types, then the task is scheduled to the
+earliest executor of this core type to get another record of
+that task-type and core-type execution time. In all cases,
+dHEFT updates the history of records on every task execution to adapt for phase changes in the application. \footnote{The time complexity of the task submission step is \textit{O($nN$)} and the task-to-core assignment is \textit{O($n$)}, where \textit{$n$} is the number of tasks and \textit{$N$} is the number of cores.}
+
+The initial dHEFT version presented in previous work~\cite{Chronaki:ICS2015} lacks the \textit{task prioritizing phase} of the original HEFT algorithm.
+This Chapter, uses an improved version of dHEFT that adds this functionality by prioritizing tasks according to their \textit{upward rank}.
+The implementation of this is similar to the CPATH prioritization step.
+%to the tasks whenever an undiscovered tt-is has finished its execution.
+%The TDG is traversed from the top to the bottom and, using task execution times, the upward-rank-based priorities are assigned to tasks.
+When the prioritized tasks become ready, they are inserted in a sorted ready queue in decreasing order of their priorities.
+The algorithm then accesses the tasks in the order of their priorities to find the earliest executor for each of them.
